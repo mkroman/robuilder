@@ -5,6 +5,7 @@
 #
 # (C) mk
 set -e
+PATH="/usr/bin/core_perl:$PATH"
 
 # Target package name.
 package=$1
@@ -18,8 +19,5 @@ fi
 [ -z "${PKGDEST}" ] && export PKGDEST=/packages
 [ -z "${PACKAGER}" ] && export PACKAGER="Robuilder"
 
-# Download our package and then enter the directory.
-cower -d "${package}" && cd "${package}"
-
 # Build it.
-exec makepkg --syncdeps --noconfirm --skippgpcheck
+exec pacaur --syncdeps --noconfirm --noedit --skippgpcheck -Sa "${package}"

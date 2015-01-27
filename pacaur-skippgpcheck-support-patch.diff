@@ -1,0 +1,19 @@
+--- /usr/bin/pacaur
++++ /usr/bin/pacaur	2015-01-27 13:50:17.597590353 +0100
+@@ -667,7 +667,7 @@
+         if [[ ! $cachedpkg ]]; then
+             cd "$builddir/${basepkgs[$i]}"
+             note "i" $"Checking ${colorW}${pkgsdeps[$i]}${reset} integrity..."
+-            makepkg -o -d
++            makepkg ${makeopts[@]} -o -d
+             (( $? > 0)) && errmakepkg+=("${pkgsdeps[$i]}")
+         fi
+     done
+@@ -1140,6 +1140,7 @@
+                     noconfirm) noconfirm=true; pacopts+=("--noconfirm");;
+                     noedit) noedit=true;;
+                     rebuild) rebuild=true;;
++                    skippgpcheck) makeopts+=("--skippgpcheck");;
+                     root) root=true;;
+                     version) version; exit;;
+                     help) usage; exit;;
