@@ -1,14 +1,36 @@
 --- /usr/bin/pacaur
-+++ /usr/bin/pacaur	2015-01-27 13:50:17.597590353 +0100
++++ /usr/bin/pacaur	2015-01-27 14:31:47.595258043 +0100
 @@ -667,7 +667,7 @@
          if [[ ! $cachedpkg ]]; then
              cd "$builddir/${basepkgs[$i]}"
              note "i" $"Checking ${colorW}${pkgsdeps[$i]}${reset} integrity..."
 -            makepkg -o -d
-+            makepkg ${makeopts[@]} -o -d
++            makepkg ${MAKEPKGOPTS} -o -d
              (( $? > 0)) && errmakepkg+=("${pkgsdeps[$i]}")
          fi
      done
+@@ -752,7 +752,7 @@
+ 
+         if [[ $installpkg ]]; then
+             # install
+-            yes `gettext pacman Y` | makepkg -esfi ${makeopts[@]} --pkg ${pkgsdeps[$i]}
++            yes `gettext pacman Y` | makepkg -esfi ${MAKEPKGOPTS}${makeopts[@]} --pkg ${pkgsdeps[$i]}
+         else
+             unset isaurdeps
+             for j in "${pkgsdepslist[@]}"; do
+@@ -761,10 +761,10 @@
+             if [[ $isaurdeps = true ]]; then
+                 # install AUR deps
+                 note "i" $"Installing ${colorW}${pkgsdeps[$i]}${reset} dependencies..."
+-                yes `gettext pacman Y` | makepkg -esfi ${makeopts[@]} --pkg ${pkgsdeps[$i]}
++                yes `gettext pacman Y` | makepkg -esfi ${MAKEPKGOPTS}${makeopts[@]} --pkg ${pkgsdeps[$i]}
+             else
+                 # install then remove binary deps
+-                yes `gettext pacman Y` | makepkg -esfr ${makeopts[@]} --pkg ${pkgsdeps[$i]}
++                yes `gettext pacman Y` | makepkg -esfr ${MAKEPKGOPTS}${makeopts[@]} --pkg ${pkgsdeps[$i]}
+             fi
+         fi
+         # clean
 @@ -1140,6 +1140,7 @@
                      noconfirm) noconfirm=true; pacopts+=("--noconfirm");;
                      noedit) noedit=true;;

@@ -20,4 +20,5 @@ fi
 [ -z "${PACKAGER}" ] && export PACKAGER="Robuilder"
 
 # Build it.
-exec pacaur --syncdeps --noconfirm --noedit --skippgpcheck -Sa "${package}"
+MAKEPKGOPTS="--skippgpcheck --syncdeps"
+exec pacaur --noconfirm --noedit -Sa "${package}"
