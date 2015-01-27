@@ -1,0 +1,7 @@
+## Germany
+
+Server = http://mirror.23media.de/archlinux/$repo/os/$arch
+Server = http://archlinux.limun.org/$repo/os/$arch
+Server = https://archlinux.limun.org/$repo/os/$arch
+Server = http://artfiles.org/archlinux.org/$repo/os/$arch
+Server = http://archlinux.cyborg-connect.de/$repo/os/$arch
