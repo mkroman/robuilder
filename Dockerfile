@@ -7,8 +7,8 @@ USER root
 ADD conf/mirrorlist /etc/pacman.d/mirrorlist
 
 # Install development packages.
-RUN pacman -Sy --noconfirm --noprogressbar base-devel sudo git clang zsh wget && \
-  rm -rf /var/cache/pacman/pkg
+RUN pacman -Sy --noconfirm --noprogressbar subversion base-devel sudo git \
+  clang zsh wget bzr mercurial rsync && rm -rf /var/cache/pacman/pkg
 
 # Set up our robuilder user, with sudo privileges.
 RUN useradd -d /home/robuilder -m -s /bin/zsh robuilder && \
